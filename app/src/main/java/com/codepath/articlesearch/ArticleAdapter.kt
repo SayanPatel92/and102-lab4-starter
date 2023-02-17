@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 const val ARTICLE_EXTRA = "ARTICLE_EXTRA"
 private const val TAG = "ArticleAdapter"
 
-class ArticleAdapter(private val context: Context) :
+class ArticleAdapter(private val context: Context, private val articles: List<Article>) :
     RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,12 +23,14 @@ class ArticleAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // TODO: Get the individual article and bind to holder
+        fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val article = articles[position]
+            holder.bind(article)
+        }
     }
+    override fun getItemCount() = articles.size
 
-    override fun getItemCount() = 0
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
 
         private val mediaImageView = itemView.findViewById<ImageView>(R.id.mediaImage)
         private val titleTextView = itemView.findViewById<TextView>(R.id.mediaTitle)
@@ -39,11 +41,23 @@ class ArticleAdapter(private val context: Context) :
         }
 
         // TODO: Write a helper method to help set up the onBindViewHolder method
+        fun bind(article: Article) {
+            titleTextView.text = article.headline?.main
+            abstractTextView.text = article.abstract
+
+            Glide.with(context)
+                .load(article.mediaImageUrl)
+                .into(mediaImageView)
+        }
 
         override fun onClick(v: View?) {
             // TODO: Get selected article
+            val article = articles[absoluteAdapterPosition]
 
             // TODO: Navigate to Details screen and pass selected article
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(ARTICLE_EXTRA, article)
+            context.startActivity(intent)
         }
     }
 }
