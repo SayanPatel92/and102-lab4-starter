@@ -23,19 +23,16 @@ class ArticleAdapter(private val context: Context, private val articles: List<Ar
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // TODO: Get the individual article and bind to holder
-        fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val article = articles[position]
-            holder.bind(article)
-        }
+        val article = articles[position]
+        holder.bind(article)
     }
     override fun getItemCount() = articles.size
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         private val mediaImageView = itemView.findViewById<ImageView>(R.id.mediaImage)
         private val titleTextView = itemView.findViewById<TextView>(R.id.mediaTitle)
         private val abstractTextView = itemView.findViewById<TextView>(R.id.mediaAbstract)
-
         init {
             itemView.setOnClickListener(this)
         }

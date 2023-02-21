@@ -1,5 +1,4 @@
 package com.codepath.articlesearch
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             ) {
                 Log.e(TAG, "Failed to fetch articles: $statusCode")
             }
-            @SuppressLint("NotifyDataSetChanged")
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.i(TAG, "Successfully fetched articles: $json")
                 try {
