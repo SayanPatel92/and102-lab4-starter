@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 
 private const val TAG = "DetailActivity"
 
-@Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
     private lateinit var mediaImageView: ImageView
     private lateinit var titleTextView: TextView
@@ -37,6 +36,5 @@ class DetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(article.mediaImageUrl)
             .into(mediaImageView)
-
     }
 }
